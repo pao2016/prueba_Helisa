@@ -26,14 +26,19 @@ const ProfesionalSaludSchema = Schema({
         type: Boolean,
         default: true
     },
+    especialidad: {
+        type: Schema.Types.ObjectId,
+        ref: 'Especialidad',
+        required: true
+    },
    
 });
 
 
 
-UsuarioSchema.methods.toJSON = function() {
-    const { __v, password, ...usuario  } = this.toObject();
-    return usuario;
+ProfesionalSaludSchema.methods.toJSON = function() {
+    const { __v, identificacion, ...profesionaSalud  } = this.toObject();
+    return profesionaSalud;
 }
 
 module.exports = model( 'ProfesionalSalud', ProfesionalSaludSchema );
