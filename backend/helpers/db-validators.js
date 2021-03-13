@@ -2,7 +2,7 @@ const Role = require('../models/role');
 const Usuario = require('../models/usuario');
 const Especialidad = require('../models/especialidad');
 const profesionalSalud = require('../models/profesionalSalud');
-
+const Paciente = require('../models/paciente');
 const esRoleValido = async(rol = '') => {
 
     const existeRol = await Role.findOne({ rol });
@@ -44,6 +44,16 @@ const existeProfesionalSaludPorId = async( id ) => {
         throw new Error(`El id no existe ${ id }`);
     }
 }
+
+
+const existePacientePorId = async( id ) => {
+
+    const existePaciente = await Paciente.findById(id);
+    if ( !existePaciente ) {
+        throw new Error(`El id no existe ${ id }`);
+    }
+}
+
 
 
 

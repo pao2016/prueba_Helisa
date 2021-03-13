@@ -32,8 +32,7 @@ const obtenerEspecialidad = async(req, res = response ) => {
 const crearEspecialidad = async(req, res = response ) => {
 
     const nombre = req.body.nombre.toUpperCase();
-     console.log("especialidad", Especialidad);
- 
+    
     const especialidadDB = await Especialidad.findOne({ nombre });
 
     if ( especialidadDB ) {

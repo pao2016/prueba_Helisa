@@ -23,7 +23,7 @@ const PacienteSchema = Schema({
 
 
 PacienteSchema.methods.toJSON = function() {
-    const { __v, identificacion, ...paciente  } = this.toObject();
+    const { __v, estado, ...paciente  } = this.toObject();
     return paciente;
 }
 
