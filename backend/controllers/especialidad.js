@@ -1,5 +1,5 @@
 const { response } = require('express');
-const { Especialidad } = require('../models');
+const  Especialidad  = require('../models/especialidad');
 
 
 const obtenerEspecialidades = async(req, res = response ) => {
@@ -9,7 +9,8 @@ const obtenerEspecialidades = async(req, res = response ) => {
 
     const [ total, especialidades ] = await Promise.all([
         Especialidad.countDocuments(query),
-        Especialidad.find(query).skip( Number( desde ) )
+        Especialidad.find(query)
+            .skip( Number( desde ) )
             .limit(Number( limite ))
     ]);
 
@@ -31,7 +32,8 @@ const obtenerEspecialidad = async(req, res = response ) => {
 const crearEspecialidad = async(req, res = response ) => {
 
     const nombre = req.body.nombre.toUpperCase();
-
+     console.log("especialidad", Especialidad);
+ 
     const especialidadDB = await Especialidad.findOne({ nombre });
 
     if ( especialidadDB ) {
