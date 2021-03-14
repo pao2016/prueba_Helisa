@@ -74,7 +74,7 @@ const examenClinicoPorId = async( id ) => {
     }
 }
 
-const examenControlPorId = async( id ) => {
+const controlPorId = async( id ) => {
 
     const existeControl = await Control.findById(id);
     if ( !existeControl ) {
@@ -93,6 +93,6 @@ module.exports = {
     existePacientePorId,
     existeCitaPorId,
     examenClinicoPorId,
-    examenControlPorId
+    controlPorId
 }
 
