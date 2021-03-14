@@ -2,6 +2,7 @@ const { response } = require('express');
 const { ObjectId } = require('mongoose').Types;
 
 const  Cita  = require('../models/citas');
+const  Control  = require('../models/control');
 
 const coleccionesPermitidas = [
     'Cita',
@@ -16,21 +17,39 @@ const buscarCita = async( termino = '', res = response ) => {
 
     const esMongoID = ObjectId.isValid( termino );  
 
-    if ( esMongoID ) {
-        const cita = await Cita.findById(termino)
-                            .populate('profesionalSalud','nombre')
-                            .populate('paciente','nombre');
+     const cita = await Cita.aggregate(
+         [
+             {
+                 $match : {
+                     _id : ObjectId(termino)
+                    
+                    }
+                
+             },
+             {
+                 $lookup:{
+                     from :'controls',
+                     localField : '_id',
+                     foreignField :'cita',
+                     as : 'controles'
+                 }
+             },
+             {
+                $lookup:{
+                    from :'examenclinicos',
+                    localField : '_id',
+                    foreignField :'cita',
+                    as : 'ExamenClinico'
+                }
+            }
+            
+        ])
+       
+        
         return res.json({
             results: ( cita ) ? [ cita ] : []
         });
-    }
-
-  console.log("termino", {Cita})
-    const citas = await Cita.paciente.find({ nombre: termino });
-
-    res.json({
-        results: citas
-    });
+    
 
 }
 
