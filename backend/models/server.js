@@ -17,7 +17,8 @@ class Server {
             paciente: '/api/paciente',
             cita: '/api/cita',
             examenClinico: '/api/examenClinico',
-            control: '/api/control'
+            control: '/api/control',
+            buscar:     '/api/buscar',
         }
 
 
@@ -59,6 +60,7 @@ class Server {
         this.app.use( this.paths.cita, require('../routes/cita'));
         this.app.use( this.paths.examenClinico, require('../routes/examenClinico'));
         this.app.use( this.paths.control, require('../routes/control'));
+        this.app.use( this.paths.buscar, require('../routes/buscar'));
     }
 
     listen() {
