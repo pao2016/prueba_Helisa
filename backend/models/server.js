@@ -15,7 +15,8 @@ class Server {
             especialidad:   '/api/especialidad',
             profesionalSalud: '/api/profesionalSalud',
             paciente: '/api/paciente',
-            cita: '/api/cita'
+            cita: '/api/cita',
+            examenClinico: '/api/examenClinico'
         }
 
 
@@ -55,6 +56,7 @@ class Server {
         this.app.use( this.paths.profesionalSalud, require('../routes/profesionalSalud'));
         this.app.use( this.paths.paciente, require('../routes/paciente'));
         this.app.use( this.paths.cita, require('../routes/cita'));
+        this.app.use( this.paths.examenClinico, require('../routes/examenClinico'));
     }
 
     listen() {

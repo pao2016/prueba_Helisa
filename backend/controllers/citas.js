@@ -1,5 +1,4 @@
 const { response } = require('express');
-const { moment  } = require('moment');
 const Cita  = require('../models/citas');
 
 
@@ -55,7 +54,6 @@ const crearCita = async(req, res = response ) => {
         nombre: body.nombre.toUpperCase(),
         fecha :  fecha
     }
-    console.log("data a guardar", data);
 
     const cita = new Cita( data );
 
