@@ -1,8 +1,9 @@
 const { response } = require('express');
+const { moment  } = require('moment');
 const Cita  = require('../models/citas');
 
 
-const obtenerCitas= async(req, res = response ) => {
+const obtenerCitas = async(req, res = response ) => {
 
     const { limite = 5, desde = 0 } = req.query;
     const query = { estado: true };
@@ -35,9 +36,10 @@ const obtenerCita = async(req, res = response ) => {
 }
 
 const crearCita = async(req, res = response ) => {
+   
 
     const { estado, ...body } = req.body;
-
+    const fecha =  Date(body.fecha);
     const citaDB = await Cita.findOne({ nombre: body.nombre });
 
     if ( citaDB ) {
@@ -47,10 +49,13 @@ const crearCita = async(req, res = response ) => {
     }
 
     // Generar la data a guardar
+
     const data = {
         ...body,
-        nombre: body.nombre.toUpperCase()
+        nombre: body.nombre.toUpperCase(),
+        fecha :  fecha
     }
+    console.log("data a guardar", data);
 
     const cita = new Cita( data );
 

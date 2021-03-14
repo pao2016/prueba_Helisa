@@ -1,8 +1,9 @@
 const Role = require('../models/role');
 const Usuario = require('../models/usuario');
 const Especialidad = require('../models/especialidad');
-const profesionalSalud = require('../models/profesionalSalud');
+const ProfesionalSalud = require('../models/profesionalSalud');
 const Paciente = require('../models/paciente');
+const Cita = require('../models/paciente');
 const esRoleValido = async(rol = '') => {
 
     const existeRol = await Role.findOne({ rol });
@@ -39,7 +40,7 @@ const existeEspecialidadPorId = async( id ) => {
 
 const existeProfesionalSaludPorId = async( id ) => {
 
-    const existeProfesionalSalud = await profesionalSalud.findById(id);
+    const existeProfesionalSalud = await ProfesionalSalud.findById(id);
     if ( !existeProfesionalSalud ) {
         throw new Error(`El id no existe ${ id }`);
     }
@@ -54,6 +55,14 @@ const existePacientePorId = async( id ) => {
     }
 }
 
+const existeCitaPorId = async( id ) => {
+
+    const existeCita = await Cita.findById(id);
+    if ( !existeCita ) {
+        throw new Error(`El id no existe ${ id }`);
+    }
+}
+
 
 
 
@@ -62,6 +71,8 @@ module.exports = {
     emailExiste,
     existeUsuarioPorId,
     existeEspecialidadPorId,
-    existeProfesionalSaludPorId
+    existeProfesionalSaludPorId,
+    existePacientePorId,
+    existeCitaPorId
 }
 

@@ -11,7 +11,6 @@ const CitaSchema = Schema({
     fecha: {
         type: Date,
         required: [true, 'La fecha es obligatorria'],
-        unique: true
     },
 
     estado: {
